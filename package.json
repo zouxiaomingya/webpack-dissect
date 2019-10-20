@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/zouxiaomingya/webpack-dissect/issues"
   },
-  "homepage": "https://github.com/zouxiaomingya/webpack-dissect#readme"
+  "homepage": "https://github.com/zouxiaomingya/webpack-dissect#readme",
+  "devDependencies": {
+    "tapable": "^1.1.3"
+  }
 }

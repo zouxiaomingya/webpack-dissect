@@ -58,3 +58,4 @@ module.exports = {
 ### tapable
 Tapable 是一个小型的库，允许你对一个 javascript 模块添加和应用插件。它可以被继承或混入到其他模块中。类似于 NodeJS 的 EventEmitter 类，专注于自定义事件的触发和处理。除此之外，Tapable 还允许你通过回调函数的参数，访问事件的“触发者(emittee)”或“提供者(producer)”。
 
+[tapable 介绍](https://github.com/zouxiaomingya/webpack-dissect/blob/master/Tapable.md)
