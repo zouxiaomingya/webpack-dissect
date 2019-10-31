@@ -1,46 +1,47 @@
 const path = require('path');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const resolve = (...arg) => path.join(__dirname, ...arg);
 
 module.exports = {
-  entry: './src/index.js',
-  mode: 'development', // 默认 production 生产环境
-  // devtool: 'cheap-module-eval-source-map',
-  output: {
-    path: resolve('dist'),//定位，输出文件的目标路径
-    filename: '[name].js', //文件名[name].js默认，也可自行配置
+  entry: "./app/entry", // string | object | array
+  // Webpack打包的入口
+  output: {  // 定义webpack如何输出的选项
+    path: path.resolve(__dirname, "dist"), // string
+    // 所有输出文件的目标路径
+    filename: "[chunkhash].js", // string
+    // 「入口(entry chunk)」文件命名模版
+    publicPath: "/assets/", // string
+    // 构建文件的输出目录
+    /* 其它高级配置 */
   },
-  devServer: {
-    contentBase: "./public/index.html",//本地服务器所加载的页面所在的目录
-    historyApiFallback: true,//不跳转
-    inline: true//实时刷新
-  },
-  plugins: [
-    new HtmlWebpackPlugin({
-      template: './public/index.html',
-    }),
-  ],
-  module: {
-    rules: [
+  module: {  // 模块相关配置
+    rules: [ // 配置模块loaders，解析规则
       {
-        test: /(\.jsx|\.js)$/,
-        use: {
-          loader: "babel-loader"
+        test: /\.jsx?$/,  // RegExp | string
+        include: [ // 和test一样，必须匹配选项
+          path.resolve(__dirname, "app")
+        ],
+        exclude: [ // 必不匹配选项（优先级高于test和include）
+          path.resolve(__dirname, "app/demo-files")
+        ],
+        loader: "babel-loader", // 模块上下文解析
+        options: { // loader的可选项
+          presets: ["es2015"]
         },
-        exclude: /node_modules/
-      },
-      {
-        test: /\.css$/,
-        use: ['style-loader', 'css-loader',],
       },
     ]
   },
-  resolve: {
-    // 设置别名
-    alias: {
-      '@': resolve('src'),
-    },
-    // 文件后缀补全
-    extensions: ['.js', '.jsx', '.ts', '.tsx'],
+  resolve: { //  解析模块的可选项
+    modules: [ // 模块的查找目录
+      "node_modules",
+      path.resolve(__dirname, "app")
+    ],
+    extensions: [".js", ".json", ".jsx", ".css"], // 用到的文件的扩展
+    alias: { // 模块别名列表
+      "module": "new-module"
+	  },
   },
+  devtool: "source-map", // enum
+  // 为浏览器开发者工具添加元数据增强调试
+  plugins: [ // 附加插件列表
+    // ...
+  ],
 }
