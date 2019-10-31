@@ -27,6 +27,7 @@ module.exports = {
           presets: ["es2015"]
         },
       },
+    ]
   },
   resolve: { //  解析模块的可选项
     modules: [ // 模块的查找目录
