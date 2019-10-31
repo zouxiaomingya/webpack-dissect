@@ -1,5 +1,16 @@
 ## webpack详解
 
+```
+// js babel
+cnpm i -D babel-loader @babel/core
+// html 
+cnpm i -D html-webpack-plugin
+// 启动服务
+cnpm install --save-dev webpack-dev-server;
+```
+如果全局安装了 webpack webpack-cli 但是却提示找不到可以使用下面方法
+> cnpm link webpack-cli webpack -D
+
 ```js
 const path = require('path');
 module.exports = {
